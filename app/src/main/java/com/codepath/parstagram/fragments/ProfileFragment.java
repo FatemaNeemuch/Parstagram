@@ -17,14 +17,15 @@ public class ProfileFragment extends PostsFragment{
     protected void queryPosts() {
         // Specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        //get user
+        // include data referred by user key
         query.include(Post.KEY_USER);
         //only have current user's posts
         query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
-        //limit number of posts gotten
+        // limit query to latest 20 items
         query.setLimit(20);
-        //show the newest posts at the top of the feed
+        // order posts by creation date (newest first)
         query.addDescendingOrder(Post.KEY_CREATED_AT);
+        // start an asynchronous call for posts
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -33,15 +34,9 @@ public class ProfileFragment extends PostsFragment{
                     Toast.makeText(getContext(), "issue with getting post", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                //loop through all the posts
-//                for (Post post : posts){
-//                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
-//                }
-//                //present posts on timeline with newest on top
-//                for (int i = posts.size() - 1; i >= 0; i--){
-//                    allPosts.add(posts.get(i));
-//                }
+                //save received posts to list
                 allPosts.addAll(posts);
+                //notify adapter of new data
                 adapter.notifyDataSetChanged();
             }
         });

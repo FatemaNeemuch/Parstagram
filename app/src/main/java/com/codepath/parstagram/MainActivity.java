@@ -20,10 +20,10 @@ import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    //class constants
+    //class constant
     public static final String TAG = "MainActivity";
 
-    //instance variable
+    //instance variables
     private Button btnLogout;
     private BottomNavigationView bottomNavigation;
     final FragmentManager fragmentManager = getSupportFragmentManager();
@@ -33,14 +33,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //reference to view
+        //reference to views
         btnLogout = findViewById(R.id.btnLogout);
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
+        //tabs
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment;
+                //dictates which fragment to launch depending on which menu item clicked
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
                         fragment = new PostsFragment();
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ProfileFragment();
                         break;
                 }
+                //shows the fragment clicked
                 fragmentManager.beginTransaction().replace(R.id.flcontainer, fragment).commit();
                 return true;
             }

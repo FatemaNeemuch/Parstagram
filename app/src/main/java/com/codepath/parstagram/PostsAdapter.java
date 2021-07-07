@@ -31,12 +31,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //inflate layout
         View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PostsAdapter.ViewHolder holder, int position) {
+        //get post
         Post post = posts.get(position);
         holder.bind(post);
     }
@@ -48,12 +50,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        //instance variables
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView tvDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            //reference to views
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
@@ -61,10 +65,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         }
 
         public void bind(Post post) {
+            //set username
             tvUsername.setText(post.getUser().getUsername());
+            //set caption
             tvDescription.setText(post.getDescription());
             ParseFile image = post.getImage();
+            //check if image exists for post
             if (image != null){
+                //set image for post if applicable
                 Glide.with(context).load(image.getUrl()).into(ivImage);
             }
         }
