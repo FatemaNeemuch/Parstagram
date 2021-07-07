@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon"
         android:name=".ParseApplication"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Parstagram">
         <provider
