@@ -1,6 +1,7 @@
 package com.codepath.parstagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -15,13 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
     //instance variables
-    private Context context;
-    private List<Post> posts;
+    Context context;
+    List<Post> posts;
 
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
@@ -48,7 +51,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         return posts.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    // Clean all elements of the recycler
+    public void clear() {
+        posts.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Post> list) {
+        posts.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         //instance variables
         private TextView tvUsername;
@@ -61,7 +76,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
-
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Post post) {
@@ -74,6 +89,24 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             if (image != null){
                 //set image for post if applicable
                 Glide.with(context).load(image.getUrl()).into(ivImage);
+            }
+        }
+
+        // when the user clicks on a post, show PostDetails for the selected post
+        @Override
+        public void onClick(View v) {
+            // gets item position
+            int position = getAdapterPosition();
+            // make sure the position is valid, i.e. actually exists in the view
+            if (position != RecyclerView.NO_POSITION) {
+                // get the movie at the position, this won't work if the class is static
+                Post post = posts.get(position);
+                // create intent for the new activity
+                Intent intent = new Intent(context, PostDetails.class);
+                // serialize the movie using parceler, use its short name as a key
+                intent.putExtra(Post.class.getSimpleName(), Parcels.wrap(post));
+                // show the activity
+                context.startActivity(intent);
             }
         }
     }
