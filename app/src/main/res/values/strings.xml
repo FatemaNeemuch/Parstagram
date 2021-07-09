@@ -1,5 +1,29 @@
 <resources>
     <string name="app_name">Parstagram</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="logout">Logout</string>
+    <string name="description">Description...</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="post">Post</string>
+    <string name="textview">TextView</string>
+    <string name="query_post_log">issue with getting post</string>
+    <string name="fetch_timeline_log">issue with getting post</string>
+    <string name="empty_description">Description cannot be empty</string>
+    <string name="no_image">There is no image</string>
+    <string name="launch_camera_log">start activity for result</string>
+    <string name="activity_result_log">Picture wasn\'t taken!</string>
+    <string name="photofile_uri_log">failed to create directory</string>
+    <string name="save_post_error_log">Error while saving</string>
+    <string name="save_post_success_log">Post successfully saved!!</string>
+    <string name="posted">Posted!!</string>
+    <string name="signed_up">Signed Up!!</string>
+    <string name="login_issue">issue with login</string>
+    <string name="just_now">just now</string>
+    <string name="minute_ago">a minute ago</string>
+    <string name="hour_ago">an hour ago</string>
+    <string name="yesterday">yesterday</string>
 </resources>

@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         //reference to views
-        etUsername = findViewById(R.id.tvUsername);
+        etUsername = findViewById(R.id.tvUsernameWrite);
         etPassword = findViewById(R.id.tvPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
@@ -70,12 +70,11 @@ public class LoginActivity extends AppCompatActivity {
                         //if error when creating new account, inform user
                         if (e != null) {
                             Log.e(TAG, "issue with sign up", e);
-                            Toast.makeText(LoginActivity.this, "issue with sign up", Toast.LENGTH_SHORT).show();
                             return;
                         } else {
                             //if new account created, call gotoMainActivity
                             goToMainActivity();
-                            Toast.makeText(LoginActivity.this, "Signed Up!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, getString(R.string.signed_up), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -92,12 +91,11 @@ public class LoginActivity extends AppCompatActivity {
                 //if username or password are incorrect or any other error, inform user
                 if (e != null){
                     Log.e(TAG, "issue with login", e);
-                    Toast.makeText(LoginActivity.this, "issue with login", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.login_issue), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 //if valid username and password, call gotoMainActivity
                 goToMainActivity();
-                Toast.makeText(LoginActivity.this, "Logged In!!", Toast.LENGTH_SHORT).show();
             }
         });
     }

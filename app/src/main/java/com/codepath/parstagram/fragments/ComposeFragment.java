@@ -44,6 +44,14 @@ public class ComposeFragment extends Fragment {
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 53;
     public String photoFileName = "photo.jpg";
     public static final String TAG = "ComposeFragment";
+    public static final String AUTHORITY = "com.codepath.fileprovider";
+    public static final int ORIENTATION_0 = 0;
+    public static final int ORIENTATION_90 = 90;
+    public static final int ORIENTATION_180 = 180;
+    public static final int ORIENTATION_270 = 270;
+    public static final int COORDINATE = 0;
+    public static final int DIVIDE = 2;
+    public static final int RESET = 0;
 
     //instance variables
     private EditText etDescription;
@@ -83,12 +91,12 @@ public class ComposeFragment extends Fragment {
                 String description = etDescription.getText().toString();
                 //make sure caption isn't empty
                 if (description.isEmpty()){
-                    Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.empty_description), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 //make sure photo has been captured
                 if (photoFile == null || ivPostImage.getDrawable() == null){
-                    Toast.makeText(getContext(), "There is no image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.no_image), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
@@ -116,14 +124,14 @@ public class ComposeFragment extends Fragment {
         // wrap File object into a content provider
         // required for API >= 24
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-        Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.codepath.fileprovider", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(getContext(), AUTHORITY, photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
         // So as long as the result is not null, it's safe to use the intent.
         if (intent.resolveActivity(getContext().getPackageManager()) != null) {
             // Start the image capture intent to take photo
-            Log.i(TAG, "start activity for result");
+            Log.i(TAG, getString(R.string.launch_camera_log));
             startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
     }
@@ -138,7 +146,7 @@ public class ComposeFragment extends Fragment {
                 // Load the image into a preview
                 ivPostImage.setImageBitmap(rotatedImage);
             } else { // Result was a failure
-                Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.activity_result_log), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -152,7 +160,7 @@ public class ComposeFragment extends Fragment {
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            Log.d(TAG, "failed to create directory");
+            Log.d(TAG, getString(R.string.photofile_uri_log));
         }
 
         // Return the file target for the photo based on filename
@@ -171,14 +179,13 @@ public class ComposeFragment extends Fragment {
             @Override
             public void done(ParseException e) {
                 if (e != null){
-                    Log.e(TAG, "Error while saving", e);
-                    Toast.makeText(getContext(), "Error while saving", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, getString(R.string.save_post_error_log), e);
                 }
-                Log.i(TAG, "Post successfully saved!!");
-                Toast.makeText(getContext(), "Posted!!", Toast.LENGTH_SHORT).show();
+                Log.i(TAG, getString(R.string.save_post_success_log));
+                Toast.makeText(getContext(), getString(R.string.posted), Toast.LENGTH_SHORT).show();
                 //empty the view fields
                 etDescription.setText("");
-                ivPostImage.setImageResource(0);
+                ivPostImage.setImageResource(RESET);
             }
         });
     }
@@ -199,14 +206,14 @@ public class ComposeFragment extends Fragment {
         }
         String orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
         int orientation = orientString != null ? Integer.parseInt(orientString) : ExifInterface.ORIENTATION_NORMAL;
-        int rotationAngle = 0;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = 90;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = 180;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = 270;
+        int rotationAngle = ORIENTATION_0;
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = ORIENTATION_90;
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = ORIENTATION_180;
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = ORIENTATION_270;
         // Rotate Bitmap
         Matrix matrix = new Matrix();
-        matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
-        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
+        matrix.setRotate(rotationAngle, (float) bm.getWidth() / DIVIDE, (float) bm.getHeight() / DIVIDE);
+        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, COORDINATE, COORDINATE, bounds.outWidth, bounds.outHeight, matrix, true);
         // Return result
         return rotatedBitmap;
     }

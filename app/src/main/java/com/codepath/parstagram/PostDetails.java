@@ -15,9 +15,10 @@ import java.util.Date;
 public class PostDetails extends AppCompatActivity {
 
     //instance variables
-    TextView tvDescription;
+    TextView tvCaption;
     TextView tvCreatedAt;
     Post post;
+//    Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +26,20 @@ public class PostDetails extends AppCompatActivity {
         setContentView(R.layout.activity_post_details);
 
         //reference to views
-        tvDescription = findViewById(R.id.tvDescription);
+        tvCaption = findViewById(R.id.tvCaption);
         tvCreatedAt = findViewById(R.id.tvCreatedAt);
 
         // unwrap the post passed in via intent, using its simple name as a key
         post = Parcels.unwrap(getIntent().getParcelableExtra(Post.class.getSimpleName()));
 
+//        utils = new Utils();
+
         //set caption
-        tvDescription.setText(post.getDescription());
+        tvCaption.setText(post.getDescription());
         //get created at time
         Date createdAt = post.getCreatedAt();
         //change to how long ago it was posted
-        String timeAgo = Post.calculateTimeAgo(createdAt);
+        String timeAgo = Utils.calculateTimeAgo(createdAt);
         //set created at
         tvCreatedAt.setText(timeAgo);
     }

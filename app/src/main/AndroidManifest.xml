@@ -23,6 +23,7 @@
         android:theme="@style/Theme.Parstagram"
         android:usesCleartextTraffic="true">
         <activity android:name=".PostDetails"></activity>
+        <activity android:name=".ProfilePostDetails"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

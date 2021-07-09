@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -30,12 +31,14 @@ public class PostsFragment extends Fragment {
 
     //class constant
     public static final String TAG = "PostFragment";
+    public static final int QUERY_LIMIT = 20;
+    public static final int PAGE = 0;
 
     //instance variables
-    private RecyclerView rvPosts;
+    protected RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
-    private SwipeRefreshLayout swipeContainer;
+    protected SwipeRefreshLayout swipeContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,11 +59,10 @@ public class PostsFragment extends Fragment {
         //set adapter
         rvPosts.setAdapter(adapter);
         //set layout manager
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        rvPosts.setLayoutManager(linearLayoutManager);
+        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Lookup the swipe container view
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer = view.findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -68,7 +70,7 @@ public class PostsFragment extends Fragment {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
-                fetchTimelineAsync(0);
+                fetchTimelineAsync(PAGE);
             }
         });
         // Configure the refreshing colors
@@ -87,7 +89,7 @@ public class PostsFragment extends Fragment {
         // include data referred by user key
         query.include(Post.KEY_USER);
         // limit query to latest 20 items
-        query.setLimit(20);
+        query.setLimit(QUERY_LIMIT);
         // order posts by creation date (newest first)
         query.addDescendingOrder(Post.KEY_CREATED_AT);
         // start an asynchronous call for posts
@@ -95,8 +97,7 @@ public class PostsFragment extends Fragment {
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if (e != null){
-                    Log.e(TAG, "issue with getting post", e);
-                    Toast.makeText(getContext(), "issue with getting post", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, getString(R.string.fetch_timeline_log), e);
                     return;
                 }
                 //clear posts
@@ -115,7 +116,7 @@ public class PostsFragment extends Fragment {
         // include data referred by user key
         query.include(Post.KEY_USER);
         // limit query to latest 20 items
-        query.setLimit(20);
+        query.setLimit(QUERY_LIMIT);
         // order posts by creation date (newest first)
         query.addDescendingOrder(Post.KEY_CREATED_AT);
         // start an asynchronous call for posts
@@ -123,8 +124,7 @@ public class PostsFragment extends Fragment {
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if (e != null){
-                    Log.e(TAG, "issue with getting post", e);
-                    Toast.makeText(getContext(), "issue with getting post", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, getString(R.string.query_post_log), e);
                     return;
                 }
                 //save received posts to list
