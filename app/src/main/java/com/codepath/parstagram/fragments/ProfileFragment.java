@@ -1,10 +1,12 @@
 package com.codepath.parstagram.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.codepath.parstagram.LoginActivity;
 import com.codepath.parstagram.Post;
 import com.codepath.parstagram.ProfileAdapter;
 import com.codepath.parstagram.R;
@@ -41,6 +44,7 @@ public class ProfileFragment extends Fragment{
     protected List<Post> userPosts;
     protected TextView tvUsernameProfile;
     protected SwipeRefreshLayout swipeContainerProfile;
+    private Button btnLogout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +60,7 @@ public class ProfileFragment extends Fragment{
         //reference to views
         rvProfile = view.findViewById(R.id.rvProfile);
         tvUsernameProfile = view.findViewById(R.id.tvUsernameProfile);
+        btnLogout = view.findViewById(R.id.btnLogout);
 
         userPosts = new ArrayList<>();
         profileAdapter = new ProfileAdapter(getContext(), userPosts);
@@ -65,6 +70,18 @@ public class ProfileFragment extends Fragment{
         rvProfile.setLayoutManager(new GridLayoutManager(getContext(), SPAN_COUNT));
         //set username
         tvUsernameProfile.setText(ParseUser.getCurrentUser().getUsername());
+
+        //logout button
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOut();
+                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+                //go back to login page
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Lookup the swipe container view
         swipeContainerProfile = view.findViewById(R.id.swipeContainerProfile);

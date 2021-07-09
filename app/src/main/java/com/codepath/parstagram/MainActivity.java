@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
 
     //instance variables
-    private Button btnLogout;
     private BottomNavigationView bottomNavigation;
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //reference to views
-        btnLogout = findViewById(R.id.btnLogout);
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
         //tabs
@@ -63,18 +61,5 @@ public class MainActivity extends AppCompatActivity {
 
         // Set default selection
         bottomNavigation.setSelectedItemId(R.id.action_home);
-
-        //logout button
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParseUser.logOut();
-                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
-                //go back to login page
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 }
