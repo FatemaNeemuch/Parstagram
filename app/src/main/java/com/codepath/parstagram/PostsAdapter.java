@@ -14,10 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
+import java.util.Date;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
@@ -69,6 +71,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView tvDescription;
+        private TextView tvCreatedAtPost;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +79,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvCreatedAtPost = itemView.findViewById(R.id.tvCreatedAtPost);
             itemView.setOnClickListener(this);
         }
 
@@ -84,6 +88,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername.setText(post.getUser().getUsername());
             //set caption
             tvDescription.setText(post.getDescription());
+            //get created at time
+            Date createdAt = post.getCreatedAt();
+            //change to how long ago it was posted
+            String timeAgo = null;
+            try {
+                timeAgo = Utils.getRelativeTimeAgo(createdAt);
+            } catch (ParseException | java.text.ParseException e) {
+                e.printStackTrace();
+            }
+            //set created at
+            tvCreatedAtPost.setText(timeAgo);
             ParseFile image = post.getImage();
             //check if image exists for post
             if (image != null){

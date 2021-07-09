@@ -27,7 +27,14 @@
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="hello world" />
+
+    <TextView
+        android:id="@+id/tvCreatedAtPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/tvDescription"
+        tools:text="5m" />
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 
 import org.parceler.Parcels;
@@ -46,7 +47,12 @@ public class ProfilePostDetails extends AppCompatActivity {
         //get created at time
         Date createdAt = post.getCreatedAt();
         //change to how long ago it was posted
-        String timeAgo = Utils.calculateTimeAgo(createdAt);
+        String timeAgo = null;
+        try {
+            timeAgo = Utils.getRelativeTimeAgo(createdAt);
+        } catch (ParseException | java.text.ParseException e) {
+            e.printStackTrace();
+        }
         //set created at
         tvCreatedAtDetails.setText(timeAgo);
         //check if image exists for post

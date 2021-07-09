@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.codepath.parstagram.fragments.PostsFragment;
+import com.parse.ParseException;
 
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
@@ -39,7 +40,12 @@ public class PostDetails extends AppCompatActivity {
         //get created at time
         Date createdAt = post.getCreatedAt();
         //change to how long ago it was posted
-        String timeAgo = Utils.calculateTimeAgo(createdAt);
+        String timeAgo = null;
+        try {
+            timeAgo = Utils.getRelativeTimeAgo(createdAt);
+        } catch (ParseException | java.text.ParseException e) {
+            e.printStackTrace();
+        }
         //set created at
         tvCreatedAt.setText(timeAgo);
     }
