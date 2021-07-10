@@ -22,7 +22,6 @@ public class ProfilePostDetails extends AppCompatActivity {
     ImageView ivImageDetails;
     TextView tvCreatedAtDetails;
     Post post;
-//    Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +36,6 @@ public class ProfilePostDetails extends AppCompatActivity {
 
         // unwrap the post passed in via intent, using its simple name as a key
         post = Parcels.unwrap(getIntent().getParcelableExtra(Post.class.getSimpleName()));
-
-//        utils = new Utils();
 
         //set username
         tvUsernameDetails.setText(post.getUser().getUsername());

@@ -19,7 +19,6 @@ public class PostDetails extends AppCompatActivity {
     TextView tvCaption;
     TextView tvCreatedAt;
     Post post;
-//    Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +31,6 @@ public class PostDetails extends AppCompatActivity {
 
         // unwrap the post passed in via intent, using its simple name as a key
         post = Parcels.unwrap(getIntent().getParcelableExtra(Post.class.getSimpleName()));
-
-//        utils = new Utils();
 
         //set caption
         tvCaption.setText(post.getDescription());

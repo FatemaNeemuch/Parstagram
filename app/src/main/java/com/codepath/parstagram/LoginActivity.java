@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.tvPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
+
         //login button
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
         });
+
         //sign up button
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,6 +30,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     //class constants
     public static final String TAG = "PostsAdapter";
+
     //instance variables
     Context context;
     List<Post> posts;
@@ -125,8 +126,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context).load(image.getUrl()).into(ivImage);
             }
 
-
-
+            //Double click post to like:
             isDoubleClicked=false;
 
             Handler handler=new Handler();
@@ -144,6 +144,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     if(isDoubleClicked){
                         //Actions when double Clicked
                         if (post.getLiked()){
+                            //unlike
                             post.setLiked(false);
                             post.setLikes(post.getLikes() - 1);
                             //set likes status
@@ -151,6 +152,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                             //set liked image status
                             Glide.with(context).load(R.drawable.ic_vector_heart_stroke).into(ivLiked);
                         }else {
+                            //like
                             post.setLiked(true);
                             post.setLikes(post.getLikes() + 1);
                             //set likes status
