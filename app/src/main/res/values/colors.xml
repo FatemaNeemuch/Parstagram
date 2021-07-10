@@ -11,9 +11,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#D8215F</color>
+    <color name="color_grey">#F1EFEF</color>
 
     <color name="grey">#bfbfbf</color>
-    <color name="link_blue">#4d94ff</color>
+    <color name="link_blue">#19AAF8</color>
+    <color name="button_green">#2EC529</color>
     <color name="darkRed">#cc0000</color>
     <color name="colordarkRed">#cc0000</color>
 

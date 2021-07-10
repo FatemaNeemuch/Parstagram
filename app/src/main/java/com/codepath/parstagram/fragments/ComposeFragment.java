@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.codepath.parstagram.MainActivity;
 import com.codepath.parstagram.Post;
 import com.codepath.parstagram.R;

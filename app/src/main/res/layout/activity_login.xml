@@ -34,6 +34,7 @@
         android:layout_below="@+id/tvPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/link_blue"
         android:text="@string/login"/>
 
     <Button
@@ -41,6 +42,7 @@
         android:layout_below="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_green"
         android:text="@string/sign_up"/>
 
 </RelativeLayout>
