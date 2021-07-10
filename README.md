@@ -1,57 +1,57 @@
-# Project 4 - *Name of App Here*
+# Project 4 - Parstagram
 
-**Name of your app** is a photo sharing app using Parse as its backend.
+Parstagram is a photo sharing app using Parse as its backend.
 
-Time spent: **X** hours spent in total
+Time spent: 18 hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-- [ ] User sees app icon in home screen.
-- [ ] User can sign up to create a new account using Parse authentication
-- [ ] User can log in to his or her account
-- [ ] The current signed in user is persisted across app restarts
-- [ ] User can log out of his or her account
-- [ ] User can take a photo, add a caption, and post it to "Instagram"
-- [ ] User can view the last 20 posts submitted to "Instagram"
-- [ ] User can pull to refresh the last 20 posts submitted to "Instagram"
-- [ ] User can tap a post to go to a Post Details activity, which includes timestamp and caption.
-- [ ] User sees app icon in home screen
+- [x] User sees app icon in home screen.
+- [x] User can sign up to create a new account using Parse authentication
+- [x] User can log in to his or her account
+- [x] The current signed in user is persisted across app restarts
+- [x] User can log out of his or her account
+- [x] User can take a photo, add a caption, and post it to "Instagram"
+- [x] User can view the last 20 posts submitted to "Instagram"
+- [x] User can pull to refresh the last 20 posts submitted to "Instagram"
+- [x] User can tap a post to go to a Post Details activity, which includes timestamp and caption.
 
 The following **stretch** features are implemented:
 
-- [ ] Style the login page to look like the real Instagram login page.
+- [x] Style the login page to look like the real Instagram login page.
 - [ ] Style the feed to look like the real Instagram feed.
-- [ ] User can load more posts once he or she reaches the bottom of the feed using endless scrolling.
-- [ ] User should switch between different tabs using fragments and a Bottom Navigation View.
-  - [ ] Feed Tab (to view all posts from all users)
-  - [ ] Capture Tab (to make a new post using the Camera and Photo Gallery)
-  - [ ] Profile Tab (to view only the current user's posts, in a grid)
-- [ ] Show the username and creation time for each post
+- [x] User can load more posts once he or she reaches the bottom of the feed using endless scrolling.
+- [x] User should switch between different tabs using fragments and a Bottom Navigation View.
+  - [x] Feed Tab (to view all posts from all users)
+  - [x] Capture Tab (to make a new post using the Camera and Photo Gallery)
+  - [x] Profile Tab (to view only the current user's posts, in a grid)
+- [x] Show the username and creation time for each post
 - User Profiles:
   - [ ] Allow the logged in user to add a profile photo
   - [ ] Display the profile photo with each post
   - [ ] Tapping on a post's username or profile photo goes to that user's profile page
-  - [ ] User Profile shows posts in a grid
+  - [x] User Profile shows posts in a grid
 - [ ] After the user submits a new post, show an indeterminate progress bar while the post is being uploaded to Parse
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
-- [ ] User can like a post and see number of likes for each post in the post details screen.
+- [x] User can like a post and see number of likes for each post in the post details screen.
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Double tap the post to like it and unlike it
+
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. how to change the color and font of the ActionBar text
+2. how to assign different colors to the bottom tabs, the action bar, the buttons
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='./walkthrough.gif' title='walkthrough' width='' alt='walkthrough' />
 
 GIF created with [Kap](https://getkap.co/).
 
@@ -66,9 +66,11 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 Describe any challenges encountered while building the app.
 
+I didn't really encounter too many difficult challenges when creating this app. The only issue I encountered was an optional usage of the TimeUnit library, which I decided to replace with a method from the Date library.
+
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2021 Fatema Abidali Neemuchwala
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
